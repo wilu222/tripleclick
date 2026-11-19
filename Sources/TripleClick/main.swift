@@ -25,9 +25,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         apply()
 
         Multitouch.start()
-        // The trackpad stops reporting after sleep until it is re-registered.
-        NSWorkspace.shared.notificationCenter.addObserver(
-            forName: NSWorkspace.didWakeNotification, object: nil, queue: .main) { _ in Multitouch.start() }
+        Multitouch.watchForDevices()
+        // The trackpad stops reporting after sleep until it is re-registered. Restart right away,
+        // then again after 10 s in case it wasn't ready yet (deep sleep).
+        let center = NSWorkspace.shared.notificationCenter
+        center.addObserver(forName: NSWorkspace.didWakeNotification, object: nil, queue: .main) { _ in
+            Multitouch.start(reason: "wake")
+            Multitouch.restart(after: 10, reason: "wake +10s")
+        }
+        center.addObserver(forName: NSWorkspace.sessionDidBecomeActiveNotification, object: nil, queue: .main) { _ in
+            Multitouch.start(reason: "session active")
+        }
 
         // Ask for Accessibility once, then wait for the user to grant it.
         _ = AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
