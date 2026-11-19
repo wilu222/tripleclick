@@ -1,4 +1,5 @@
 import Foundation
+import IOKit
 import os
 
 // Private Apple framework, loaded at runtime. It's the only way to know how
@@ -17,9 +18,34 @@ enum Multitouch {
     // shortcut: one count shared by all devices, fine unless two trackpads are used at once.
     static let fingers = OSAllocatedUnfairLock(initialState: Int32(0))
     private static var devices: CFArray?
+    private static var restartTimer: Timer?
 
-    static func start() {
+    /// Restart once after `delay`; a newer request replaces a pending one.
+    static func restart(after delay: TimeInterval, reason: String) {
+        restartTimer?.invalidate()
+        restartTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+            start(reason: reason)
+        }
+    }
+
+    /// After deep sleep the trackpad can reappear as a new device, so restart whenever one shows up.
+    static func watchForDevices() {
+        guard let port = IONotificationPortCreate(kIOMainPortDefault) else { return }
+        CFRunLoopAddSource(CFRunLoopGetMain(), IONotificationPortGetRunLoopSource(port).takeUnretainedValue(), .defaultMode)
+        var iterator: io_iterator_t = 0
+        let added: IOServiceMatchingCallback = { _, iterator in
+            while case let s = IOIteratorNext(iterator), s != 0 { IOObjectRelease(s) }
+            Multitouch.restart(after: 2, reason: "trackpad added")
+        }
+        IOServiceAddMatchingNotification(port, kIOFirstMatchNotification,
+                                         IOServiceMatching("AppleMultitouchDevice"), added, nil, &iterator)
+        // Drain the devices that already exist; this also arms the notification.
+        while case let s = IOIteratorNext(iterator), s != 0 { IOObjectRelease(s) }
+    }
+
+    static func start(reason: String = "launch") {
         stop()
+        ClickRemapper.reenable()
         guard let lib = dlopen("/System/Library/PrivateFrameworks/MultitouchSupport.framework/MultitouchSupport", RTLD_NOW),
               let create = dlsym(lib, "MTDeviceCreateList"),
               let register = dlsym(lib, "MTRegisterContactFrameCallback"),
@@ -33,6 +59,7 @@ enum Multitouch {
             unsafeBitCast(start, to: Start.self)(device, 0)
         }
         devices = list
+        NSLog("TripleClick: listening to \(CFArrayGetCount(list)) trackpad device(s) (\(reason))")
     }
 
     static func stop() {

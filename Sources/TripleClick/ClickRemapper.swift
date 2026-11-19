@@ -21,6 +21,11 @@ enum ClickRemapper {
         CGEvent.tapEnable(tap: t, enable: true)
         return true
     }
+
+    /// Called on wake/restart in case macOS switched the tap off while asleep.
+    static func reenable() {
+        if let t = tap { CGEvent.tapEnable(tap: t, enable: true) }
+    }
 }
 
 private func handle(_ proxy: CGEventTapProxy, _ type: CGEventType, _ event: CGEvent,
