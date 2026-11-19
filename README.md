@@ -1,7 +1,7 @@
 # TripleClick
 
 A tiny macOS menu-bar app: **click the trackpad with three fingers to middle-click.**
-Open a link in a new tab, close a tab, paste in a terminal, and so on.
+Open a link in a new tab, close a tab, and anything else an app does on a middle click.
 To middle-drag, click with three fingers, keep holding, lift two fingers and drag with one.
 
 The mouse icon in the menu bar lets you switch it off, turn middle-drag off (Drag Enabled), launch it at login, or quit.
