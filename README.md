@@ -4,7 +4,7 @@
 
 A very lightweight macOS menu-bar app: **click the trackpad with three fingers to middle-click.**
 
-Open a link in a new tab, close a tab, and anything else an app does on a middle click.
+Open a browser link in a new tab, close a tab, and anything else an app does on a middle click.
 
 To middle-mouse-click drag: hold click with three fingers, lift two fingers and drag with one finger.
 
