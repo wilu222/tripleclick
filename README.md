@@ -1,3 +1,5 @@
+<img src="media/icon.png" width="128" alt="TripleClick icon">
+
 # TripleClick
 
 A very lightweight macOS menu-bar app: **click the trackpad with three fingers to middle-click.**
@@ -8,7 +10,17 @@ To middle-mouse-click drag: hold click with three fingers, lift two fingers and 
 
 This input method preserves compatibility with standard 3-finger gestures for Mission Control, App Exposé and switching desktops.
 
-The mouse icon in the menu bar lets you toggle both mouse input features, and auto-launch.
+The menu-bar icon lets you toggle both mouse input features, and auto-launch.
+
+<img src="media/menubar.gif" width="322" alt="The TripleClick menu: Enabled, Drag Enabled, Launch at Login, Quit">
+
+## Why TripleClick
+
+- **Tiny:** about 220 lines of Swift, and it uses about 12 MB of memory and no CPU when idle.
+- **Offline:** unlike some similar tools, it has no crash reporter, auto-updater or analytics. It never connects to the internet.
+- **Keeps your gestures:** unlike tools that turn moving three fingers into a middle-drag, TripleClick's drag starts with a click. Three-finger swipes stay with macOS for Mission Control, App Exposé and switching desktops.
+- **Free and open source** under the MIT license. Works on macOS 13 and later.
+
 
 ## Install
 
