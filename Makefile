@@ -7,8 +7,10 @@ IDENTITY ?= TripleClick Self-Signed
 app:
 	swift build -c release
 	rm -rf $(APP)
-	mkdir -p $(APP)/Contents/MacOS
+	mkdir -p $(APP)/Contents/MacOS $(APP)/Contents/Resources
 	cp Info.plist $(APP)/Contents/
+	cp Resources/* $(APP)/Contents/Resources/
+	xattr -cr $(APP)
 	cp .build/release/TripleClick $(APP)/Contents/MacOS/
 	codesign --force -s "$(IDENTITY)" $(APP) 2>/dev/null || { echo "No '$(IDENTITY)' cert, signing ad-hoc"; codesign --force -s - $(APP); }
 

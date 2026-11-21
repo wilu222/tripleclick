@@ -3,6 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key><string>TripleClick</string>
+	<key>CFBundleIconFile</key><string>AppIcon</string>
 	<key>CFBundleIdentifier</key><string>io.github.wilu222.tripleclick</string>
 	<key>CFBundleName</key><string>TripleClick</string>
 	<key>CFBundlePackageType</key><string>APPL</string>

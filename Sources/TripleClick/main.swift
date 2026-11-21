@@ -9,7 +9,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     func applicationDidFinishLaunching(_ note: Notification) {
         UserDefaults.standard.register(defaults: ["enabled": true, "middleDrag": true])
-        item.button?.image = NSImage(systemSymbolName: "computermouse", accessibilityDescription: "TripleClick")
+        let icon = NSImage(named: "MenuBarIconTemplate")
+        icon?.isTemplate = true
+        icon?.accessibilityDescription = "TripleClick"
+        item.button?.image = icon
         let menu = NSMenu()
         menu.delegate = self
         drag.toolTip = "Click with three fingers, keep holding, lift two fingers and drag with one "
