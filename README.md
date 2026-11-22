@@ -16,7 +16,7 @@ The menu-bar icon lets you toggle both mouse input features, and auto-launch.
 
 ## Why TripleClick
 
-- **Tiny:** about 220 lines of Swift, and it uses about 12 MB of memory and no CPU when idle.
+- **Tiny:** about 220 lines of Swift, using ~19 MB of memory and no CPU when idle.
 - **Offline:** unlike some similar tools, it has no crash reporter, auto-updater or analytics. It never connects to the internet.
 - **Keeps your gestures:** unlike tools that turn moving three fingers into a middle-drag, TripleClick's drag starts with a click. Three-finger swipes stay with macOS for Mission Control, App Exposé and switching desktops.
 - **Free and open source** under the MIT license. Works on macOS 13 and later.
