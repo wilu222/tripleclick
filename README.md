@@ -8,17 +8,17 @@ Open a browser link in a new tab, close a tab, and anything else an app does on 
 
 To middle-drag: click with three fingers, lift two, and drag with one.
 
-This input method preserves compatibility with standard 3-finger gestures for Mission Control, App Exposé and switching desktops.
+This input method preserves compatibility with standard 3-finger gestures for Mission Control, App Exposé, and switching desktops.
 
-The menu-bar icon lets you toggle both mouse input features, and auto-launch.
+The menu-bar icon lets you toggle both mouse input features and auto-launch.
 
 <img src="media/menubar.gif" width="322" alt="The TripleClick menu: Enabled, Drag Enabled, Launch at Login, Quit">
 
 ## Why TripleClick
 
 - **Tiny:** about 220 lines of Swift, using ~19 MB of memory and no CPU when idle.
-- **Offline:** unlike some similar tools, it has no crash reporter, auto-updater or analytics. It never connects to the internet.
-- **Keeps your gestures:** unlike tools that turn moving three fingers into a middle-drag, TripleClick's drag starts with a click. Three-finger swipes stay with macOS for Mission Control, App Exposé and switching desktops.
+- **Offline:** unlike some similar tools, it has no crash reporter, auto-updater, or analytics. It never connects to the internet.
+- **Keeps your gestures:** unlike tools that turn moving three fingers into a middle-drag, TripleClick's drag starts with a click. Three-finger swipes stay with macOS for Mission Control, App Exposé, and switching desktops.
 - **Free and open source** under the MIT license. Works on macOS 13 and later.
 
 
